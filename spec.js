@@ -1,4 +1,4 @@
-// describe('Test', ()=> {
+// xdescribe('Test', ()=> {
 //     it('First Test', ()=> {
 
 //         const URL = 'https://movies-finder.firebaseapp.com/'
@@ -44,7 +44,7 @@
 
 
 
-// decribe ('Selectors', () => {
+// xdecribe ('Selectors', () => {
 //     it('ID', () => {
 //         browser.get('')
 //         let idElem = element(By.id('navbar'))

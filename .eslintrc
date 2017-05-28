@@ -1,0 +1,49 @@
+{
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "globals": {
+    "Promise": true,
+    "jquery": true,
+    "$$": true,
+    "$": true
+    
+  },
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "es6": true,
+    "jquery": true,
+    "node": true
+  },
+  "settings": {
+    "ecmascript": 6,
+    "jsx": false
+  },
+  "extends": [
+    "eslint:recommended"
+  ],
+  "plugins": [],
+  "rules": {
+    "semi": 0,
+    "strict": 0,
+    "quotes": [
+      1,
+      "single"
+    ],
+    "no-unused-vars": 0,
+    "no-multi-spaces": 1,
+    "camelcase": 0,
+    "no-use-before-define": [
+      2,
+      "nofunc"
+    ],
+    "no-underscore-dangle": 0,
+    "no-unused-expressions": 2,
+    "comma-dangle": 0,
+    "no-console": 0
+  }
+}

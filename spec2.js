@@ -1,52 +1,62 @@
-const URL = ''
-let searchField = $('input[class|=form]')
-let goButton = $('span.input-group-btn button.btn.btn-primary')
-describe('Search Test', () => {
-    it('Valid Search '), () => {
+let SearchPage = require('./pageObjects/searchPage.js').SearchPage
+describe('Search', () => {
+     let searchPage = new SearchPage()
 
-        let validInput = 'Valid Movie'
-        browser.get(URL)
-        expect(browser.getCurrentUrl()).toEqual(URL);
-        expect(searchField.getAttrubute('placeholder')).toEqual('Search for movies...');
-        searchField.sendKeys(validInput);
-        expect (searchField.getAttrubute('ng-reflect-model')).toEqual(validInput)
-        goButton.click()
-        expect (element.getAttrubute('class =orange-text')).toEqual('Search Results')
-    }
-    it('Invalid Search '), () => {
+    beforeEach (() => {
+        searchPage.open() 
+        console.log('browser')
+    })
 
-        let invalidInput = 'Invalind Movie'
-        browser.get(URL)
-        expect(browser.getCurrentUrl()).toEqual(URL);
-        expect(searchField.getAttrubute('placeholder')).toEqual('Search for movies...');
-        searchField.sendKeys(invalidInput);
-        expect (searchField.getAttrubute('ng-reflect-model')).toEqual(invalidInput)
-        goButton.click()
-        expect (element.getAttrubute('class =orange-text')).toEqual('Search Results')
-    }
+    afterEach(() => {
+        browser.manage().deleteAllCookies()
 
-    it('Search with special characters'), () => {
+    })
+    it ('field has correct placeholder', () => {
+        searchPage.waitSearchField()
 
-        let inputWithSpecialChar = '!@#$%^&*()'
-        browser.get(URL)
-        expect(browser.getCurrentUrl()).toEqual(URL);
-        expect(searchField.getAttrubute('placeholder')).toEqual('Search for movies...');
-        searchField.sendKeys(inputWithSpecialChar);
-        expect (searchField.getAttrubute('ng-reflect-model')).toEqual(inputWithSpecialChar)
-        goButton.click()
-        expect (element.getAttrubute('class =orange-text')).toEqual('Search Results')
-    }
+    })
 
-    it('Empty search'), () => {
 
-        let emptyInput = ''
-        browser.get(URL)
-        expect(browser.getCurrentUrl()).toEqual(URL);
-        expect(searchField.getAttrubute('placeholder')).toEqual('Search for movies...');
-        searchField.sendKeys(emptyInput);
-        expect (searchField.getAttrubute('ng-reflect-model')).toEqual(emptyInput)
-        goButton.click()
-        expect (element.getAttrubute('class =orange-text')).not.toEqual('Search Results')
-    }
+
+
+    fit('with valid input ', () => {
+        let input = 'Amelie'
+        let expectedValue = 'Amelie'
+        let expectedResult = ''
+        let firstResult = 'Amelie'
+        searchPage.search(input, expectedValue)
+        console.log('search')
+        expect(searchPage.searchResults.count()).not.toBe(0, 'Search results should not be empty')
+        console.log('not 0')
+        searchPage.checkSearchResult(firstResult)
+        
+})
+
+    it('with invalid input ', () => {
+        let input = 'Valid Movie'
+        let expectedValue = 'Valid Movie'
+        let expectedResult = ''
+        searchPage.search(input, expectedValue)
+        searchPage.checkSearchResult(expectedResult)
+})
+
+    it('with input with special characters', () => {
+
+        let input = 'Valid Movie'
+        let expectedValue = 'Valid Movie'
+        let expectedResult = ''
+        searchPage.search(input, expectedValue)
+        searchPage.checkSearchResult(expectedResult)
+        
+    })
+
+    it('with empty input', () => {
+        let input = 'Valid Movie'
+        let expectedValue = 'Valid Movie'
+        let expectedResult = ''
+        searchPage.search(input, expectedValue)
+        searchPage.checkSearchResult(expectedResult)
+        
+    })
 
 }) 
