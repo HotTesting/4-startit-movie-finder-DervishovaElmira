@@ -4,15 +4,10 @@ describe('Search', () => {
 
     beforeEach (() => {
         searchPage.open() 
-        console.log('browser')
     })
 
     afterEach(() => {
         browser.manage().deleteAllCookies()
-
-    })
-    it ('field has correct placeholder', () => {
-        searchPage.waitSearchField()
 
     })
 
@@ -20,21 +15,28 @@ describe('Search', () => {
 
 
     fit('with valid input ', () => {
-        let input = 'Amelie'
-        let expectedValue = 'Amelie'
+        let input = 'Amélie'
+        let expectedValue = 'Amélie'
         let expectedResult = ''
-        let firstResult = 'Amelie'
-        searchPage.search(input, expectedValue)
-        console.log('search')
+        let firstResultValue = 'Amélie'
+        let serchString = $('.orange-text')
+        expect(searchPage.searchField.getAttribute(searchPage.placeholder)).toBe(searchPage.placeholderName, 'Search field should have correct name')
+        searchPage.search(input)
+        browser.sleep(5000)
+       
+        expect(searchPage.searchField.getAttribute('ng-reflect-model')).toBe('Amelie')
+       
+        // expect(serchString.getAttribute()).toContain('Search Results', 'Search Results string should be on screen')
         expect(searchPage.searchResults.count()).not.toBe(0, 'Search results should not be empty')
-        console.log('not 0')
-        searchPage.checkSearchResult(firstResult)
+        let firstResult = searchPage.searchResults.first()
+        expect(firstResult.getAttribute()).toContain('Amélie', 'First search result should contain search request')
+        
         
 })
 
     it('with invalid input ', () => {
-        let input = 'Valid Movie'
-        let expectedValue = 'Valid Movie'
+        let input = 'Invalid Movie'
+        let expectedValue = 'Invalid Movie'
         let expectedResult = ''
         searchPage.search(input, expectedValue)
         searchPage.checkSearchResult(expectedResult)
@@ -42,8 +44,8 @@ describe('Search', () => {
 
     it('with input with special characters', () => {
 
-        let input = 'Valid Movie'
-        let expectedValue = 'Valid Movie'
+        let input = 'm)&^$Ov7I#!~E'
+        let expectedValue = 'm)&^$Ov7I#!~E'
         let expectedResult = ''
         searchPage.search(input, expectedValue)
         searchPage.checkSearchResult(expectedResult)
@@ -51,8 +53,8 @@ describe('Search', () => {
     })
 
     it('with empty input', () => {
-        let input = 'Valid Movie'
-        let expectedValue = 'Valid Movie'
+        let input = ''
+        let expectedValue = ''
         let expectedResult = ''
         searchPage.search(input, expectedValue)
         searchPage.checkSearchResult(expectedResult)

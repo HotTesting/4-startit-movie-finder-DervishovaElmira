@@ -12,20 +12,9 @@ class SearchPage extends BasePage {
         
     }
 
-    search(input, expectedValue) {
-        this.typeSearchText(input, expectedValue)
-        this.submitSearch();
-        // this.getSearchFieldValue(expectedValue)
-    }
-
-    checkSearchResult(firstResult) {
-        // this.checkSearchResultIsNotZero()
-        this.checkFirstResult()
-        return this.checkFirstResult.getText().toContain(firstResult, 'First result should be as expected')
-    }
-
-    waitSearchField() {
-        return this.searchField.getAttribute(this.placeholder).toBe(this.placeholderName, 'Search field should have correct name');
+    search(input) {
+        this.typeSearchText(input)
+        this.submitSearch()
     }
 
     typeSearchText(input) {
@@ -35,19 +24,5 @@ class SearchPage extends BasePage {
     submitSearch() {
         this.goButton.click()
     }
-
-    checkSearchResultIsNotZero() {
-        return this.searchResults.count().not.toBe(0, 'Search results should not be empty')    
-    }
-
-    checkFirstResult() {
-        return this.searchResults.first()
-    }
-
-    // getSearchFieldValue(expectedValue) {
-    //     this.searchField.value(expectedValue)
-    // }
-
-  
 }
 exports.SearchPage = SearchPage
