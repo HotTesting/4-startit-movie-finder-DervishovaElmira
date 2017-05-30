@@ -14,7 +14,7 @@ describe('Search', () => {
 
 
 
-    fit('with valid input ', () => {
+    it('with valid input ', () => {
         let input = 'Amélie'
         let expectedValue = 'Amélie'
         let expectedResult = ''
